@@ -1,3 +1,38 @@
+<?php
+    $host = 'localhost';
+    $username = 'root';
+    $password = '';
+    $dbname = 'formationsite';
+
+    $connection = mysqli_connect($host, $username, $password, $dbname);
+    if ($connection == false) {
+      die('Erreur de connexion!');
+    } else {
+      $select = "SELECT count(*) from users";
+      $result = mysqli_query($connection, $select);
+      if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
+          $users = $row[0];
+        }
+      } else {
+        echo "<p>Erreur!</p>";
+      }
+    }
+
+    if ($connection == false) {
+      die('Erreur de connexion!');
+    } else {
+      $select_ = "SELECT count(*) from formations";
+      $result_ = mysqli_query($connection, $select_);
+      if (mysqli_num_rows($result_) > 0) {
+        while ($row = mysqli_fetch_array($result_)) {
+          $formationscount = $row[0];
+        }
+      } else {
+        echo "<p>Erreur!</p>";
+      }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,6 +96,7 @@
           <li><a class="nav-link scrollto" href="#why-us">Pourquoi nous</a></li>
           <li><a class="nav-link scrollto" href="#team">Nos formations</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Galerie</a></li>
+          <li><a class="nav-link scrollto" href="#clients">Partenaires</a></li>
           <li class="dropdown"><a href="#"><span>Ibtikarcom</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="https://ibtikarcom.com/">Notre site</a></li>
@@ -246,22 +282,22 @@
         <div class="row counters">
 
           <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+            <span data-purecounter-start="0" data-purecounter-end="<?php echo $users;?>" data-purecounter-duration="1" class="purecounter"></span>
             <p>BENEFICIAIRES</p>
           </div>
 
           <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+            <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
             <p>FORMATEURS</p>
           </div>
 
           <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+            <span data-purecounter-start="0" data-purecounter-end="<?php echo $formationscount;?>" data-purecounter-duration="1" class="purecounter"></span>
             <p>FORMATIONS</p>
           </div>
 
           <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+            <span data-purecounter-start="0" data-purecounter-end="2" data-purecounter-duration="1" class="purecounter"></span>
             <p>ANNEES D'EXPERIENCE</p>
           </div>
 
@@ -296,7 +332,7 @@
           if ($connection == false) {
             die('Erreur de connection!');
           } else {
-            $select = "SELECT * from formations where encours=1";
+            $select = "SELECT * from formations";
             $result = mysqli_query($connection, $select);
             if (mysqli_num_rows($result) > 0) {
               $a = 0;
@@ -339,48 +375,197 @@
         <div class="section-title">
           <span>Galerie</span>
           <h3><span>Galerie</span></h3>
-          <p class="mt-5">Photos de nos formations passées</p>
+          <p class="mt-5">Atelier Entrepreneurial pour les étudiants de l'école ESMC</p>
         </div>
 
         <div class="row portfolio-container">
 
-          <?php
-          $host = 'localhost';
-          $username = 'root';
-          $password = '';
-          $dbname = 'formationsite';
-
-          $connection = mysqli_connect($host, $username, $password, $dbname);
-          if ($connection == false) {
-            die('Erreur de connection!');
-          } else {
-            $select = "SELECT * from photos join formations on photos.id_formation = formations.id_formation";
-            $result = mysqli_query($connection, $select);
-            if (mysqli_num_rows($result) > 0) {
-              while ($row = mysqli_fetch_array($result)) {
-                echo "
-                  <div class='col-lg-4 col-md-6 portfolio-item filter-app'>
+          <div class='col-lg-6 col-md-6 portfolio-item filter-app'>
             <div class='portfolio-wrap'>
-              <img src='assets/img/Gallery/" . $row[1] . "' class='img-fluid' alt=''>
+              <img src="assets/img/Gallery/Formations/Atelier Entrepreneurial pour les étudiants de l'école ESMC/WhatsApp Image 2022-05-20 at 17.05.15.jpeg" class='img-fluid' alt=''>
               <div class='portfolio-info'>
-                <h4>Formation: " . $row[4] . "</h4>
+                <h4>Formation: Atelier Entrepreneurial pour les étudiants de l'école ESMC</h4>
               </div>
             </div>
           </div>
-                  ";
-              }
-            } else {
-              echo "Pas de données!";
-            }
-          }
-          mysqli_close($connection);
-          ?>
+
+          <div class='col-lg-6 col-md-6 portfolio-item filter-app'>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/Atelier Entrepreneurial pour les étudiants de l'école ESMC/WhatsApp Image 2022-05-20 at 22.03.31.jpeg" class='img-fluid' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: Atelier Entrepreneurial pour les étudiants de l'école ESMC</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">
+          <p class="mt-5">ENSAM</p>
+        </div>
+
+        <div class="row portfolio-container">
+          <div class='col-lg-4 col-md-6 portfolio-item filter-app'>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/ENSAM/_DSC2193.JPG" class='img-fluid' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: ENSAM</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class='col-lg-4 col-md-6 portfolio-item filter-app'>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/ENSAM/_DSC7620.JPG" class='img-fluid' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: ENSAM</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class='col-lg-4 col-md-6 portfolio-item filter-app'>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/ENSAM/_DSC7634.JPG" class='img-fluid' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: ENSAM</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">
+          <p class="mt-5">Comment Vendre et Commercialiser mon Projet - en partenariat avec l'Université UH2C dans le cadre de la 4ème promotion du programme SALEEM</p>
+        </div>
+
+        <div class="row portfolio-container d-flex align-items-center">
+          <div class='col-lg-12 col-md-6 portfolio-item filter-app d-flex justify-content-center'>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/UH2C/Comment Vendre et Commercialiser mon Projet/WhatsApp Image 2022-07-22 at 19.14.59.jpeg" class='img-fluid' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: Comment Vendre et Commercialiser mon Projet</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class='col-lg-9 col-md-6 portfolio-item filter-app'>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/UH2C/Comment Vendre et Commercialiser mon Projet/img.png" class='img-fluid w-100' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: Comment Vendre et Commercialiser mon Projet</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class='col-lg-3 col-md-6 portfolio-item filter-app '>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/UH2C/Comment Vendre et Commercialiser mon Projet/WhatsApp Image 2022-07-22 at 19.15.00.jpeg" class='img-fluid' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: Comment Vendre et Commercialiser mon Projet</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">
+          <p class="mt-5">Marketing Opérationnel et Stratégique - en partenariat avec l'Université UH2C dans le cadre de la 4ème promotion du programme SALEEM</p>
+        </div>
+
+        <div class="row portfolio-container d-flex align-items-center">
+          <div class='col-lg-12 col-md-6 portfolio-item filter-app d-flex justify-content-center'>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/UH2C/Marketing Opérationnel et Stratégique/290380670_453136766817330_8649861949523534726_n.jpeg" class='img-fluid' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: Marketing Opérationnel et Stratégique</h4>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="section-title">
+          <p class="mt-5">Sensibilisation & Culture Entrepreneurial - en partenariat avec l'Université UH2C dans le cadre de la 4ème promotion du programme SALEEM</p>
+        </div>
+
+        <div class="row portfolio-container d-flex align-items-center">
+
+          <div class='col-lg-6 col-md-6 portfolio-item filter-app d-flex justify-content-center'>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/UH2C/Sensibilisation & Culture Entrepreneurial/287792031_446772984120375_7783887530039244665_n.jpeg" class='img-fluid' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: Sensibilisation & Culture Entrepreneurial</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class='col-lg-6 col-md-6 portfolio-item filter-app d-flex justify-content-center'>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/UH2C/Sensibilisation & Culture Entrepreneurial/288772583_446772944120379_3452990325299294719_n.jpeg" class='img-fluid' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: Sensibilisation & Culture Entrepreneurial</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class='col-lg-12 col-md-6 portfolio-item filter-app d-flex justify-content-center'>
+            <div class='portfolio-wrap'>
+              <img src="assets/img/Gallery/Formations/UH2C/Sensibilisation & Culture Entrepreneurial/Capture d’écran 2022-07-27 à 14.46.46.png" class='img-fluid' alt=''>
+              <div class='portfolio-info'>
+                <h4>Formation: Sensibilisation & Culture Entrepreneurial</h4>
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>
-    </section><!-- End Team Section -->
+    </section>
+  <!-- End Team Section -->
 
-    <!-- ======= Testimonials Section ======= -->
+    <!-- ======= Partenaires Section ======= -->
+    <section id="clients" class="clients section-bg">
+        <div class="section-title">
+          <span>Partenaires</span>
+          <h3><span>Partenaires</span></h3>
+        </div>
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="assets/img/Partenaires/ymc.png" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="assets/img/Partenaires/imvl.jpg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="assets/img/Partenaires/innovatel.png" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="assets/img/Partenaires/UHIIC.png" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="assets/img/Partenaires/ensam.png" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="assets/img/Partenaires/esmc.png" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="assets/img/Partenaires/cemfa.jpg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="assets/img/Partenaires/ama.png" class="img-fluid" alt="">
+          </div>
+
+        </div>
+
+      </div>
+    </section>
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -432,7 +617,8 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="footer-info">
-              <h3>Ibtikarcom</h3>
+              <!--<h3>Ibtikarcom</h3>-->
+              <a href="https://ibtikarcom.com/"><img src="assets/img/logo-white.png" alt="Ibtikarcom" class="img-fluid mb-4"></a>
               <p>
                 47, Rue Aït Ba Amrane 3ème étage - Casablanca Maroc<br><br>
                 <strong>Phone:</strong> +212-700-252-045<br>
