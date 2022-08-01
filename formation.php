@@ -244,7 +244,7 @@ if ($connection == false) {
               <h2>Informations sur la formation</h2>
               <p>
                 <?php
-                echo str_replace("-", "<br>-", $descriptif);
+                echo $descriptif;
                 ?>
               </p>
             </div>
@@ -311,7 +311,7 @@ if ($connection == false) {
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="">Design & Edition</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="">Production Audio-visuelle</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="">Evènementiel</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="">Evénementiel</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="">Location de matériel</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="">Formation, conseil et stratégie</a></li>
             </ul>
